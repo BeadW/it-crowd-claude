@@ -121,9 +121,9 @@ main() {
         exit 0
     fi
 
-    # Get the main agent's persona
+    # Get the main agent's persona (use namespaced session file)
     local main_persona=""
-    local session_file="$HOME/.claude/session_persona"
+    local session_file="$HOME/.claude/session_persona_it_crowd"
     if [[ -f "$session_file" ]]; then
         main_persona=$(cat "$session_file")
     fi

@@ -5,50 +5,47 @@
 # These functions interact with Claude's memory system to store/retrieve
 # the active persona for the current session.
 
+# NAMESPACED SESSION FILE - allows multiple persona plugins to coexist
+SESSION_FILE="$HOME/.claude/session_persona_it_crowd"
+
 # Get current session persona from memory
-# Returns: persona name (e.g., "jin-yang") or empty string if not found
+# Returns: persona name (e.g., "roy") or empty string if not found
 get_session_persona() {
     # Check if memory file exists for current session
-    # Memory is stored in ~/.claude/memory.db (SQLite)
-    # For hook scripts, we use a simpler approach: check for temp file
+    # Memory is stored in ~/.claude/session_persona_it_crowd (namespaced)
+    # This allows it-crowd-claude and silicon-valley-claude to coexist
 
-    local session_file="$HOME/.claude/session_persona"
-
-    if [[ -f "$session_file" ]]; then
-        cat "$session_file"
+    if [[ -f "$SESSION_FILE" ]]; then
+        cat "$SESSION_FILE"
     else
         echo ""
     fi
 }
 
 # Store persona selection for current session
-# Args: $1 = persona name (e.g., "jin-yang")
+# Args: $1 = persona name (e.g., "roy")
 store_session_persona() {
     local persona="$1"
-    local session_file="$HOME/.claude/session_persona"
 
-    echo "$persona" > "$session_file"
+    echo "$persona" > "$SESSION_FILE"
 
     # Also log to stderr for debugging
-    echo "✓ Stored session persona: $persona" >&2
+    echo "✓ Stored IT Crowd session persona: $persona" >&2
 }
 
 # Clear session persona (useful for testing)
 clear_session_persona() {
-    local session_file="$HOME/.claude/session_persona"
-
-    if [[ -f "$session_file" ]]; then
-        rm "$session_file"
-        echo "✓ Cleared session persona" >&2
+    if [[ -f "$SESSION_FILE" ]]; then
+        rm "$SESSION_FILE"
+        echo "✓ Cleared IT Crowd session persona" >&2
     fi
 }
 
 # Set specific persona (for manual selection)
-# Args: $1 = persona name (e.g., "monica")
+# Args: $1 = persona name (e.g., "moss")
 # Returns: 0 on success, 1 on invalid persona
 set_persona() {
     local persona="$1"
-    local session_file="$HOME/.claude/session_persona"
 
     # Source persona manager to validate persona exists
     source "$(dirname "${BASH_SOURCE[0]}")/persona-manager.sh"
@@ -63,13 +60,13 @@ set_persona() {
     done
 
     if [[ $valid -eq 0 ]]; then
-        echo "❌ Invalid persona: $persona" >&2
+        echo "❌ Invalid IT Crowd persona: $persona" >&2
         echo "Available personas:" >&2
         list_personas >&2
         return 1
     fi
 
-    echo "$persona" > "$session_file"
-    echo "✓ Set persona to: $(persona_display_name "$persona")" >&2
+    echo "$persona" > "$SESSION_FILE"
+    echo "✓ Set IT Crowd persona to: $(persona_display_name "$persona")" >&2
     return 0
 }
