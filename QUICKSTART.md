@@ -8,12 +8,12 @@ A Claude Code plugin that makes Claude embody characters from The IT Crowd TV sh
 
 ```bash
 # Add marketplace
-claude plugin marketplace add file://~/Code/it-crowd-claude
+claude plugin marketplace add https://github.com/BeadW/it-crowd-claude.git
 
 # Install plugin
 claude plugin install it-crowd-claude
 
-# Start Claude Code
+# Restart Claude Code
 claude
 ```
 

@@ -10,11 +10,11 @@ Give Claude a personality from Channel 4's The IT Crowd. Random persona per sess
 ## Installation
 
 ```bash
-claude plugin marketplace add file://~/Code/it-crowd-claude
+claude plugin marketplace add https://github.com/BeadW/it-crowd-claude.git
 claude plugin install it-crowd-claude
 ```
 
-Done.
+Restart Claude Code and you'll get a random IT Crowd persona!
 
 ## Usage
 
