@@ -1,6 +1,0 @@
-{
-  "name": "persona-random",
-  "description": "Pick a random IT Crowd persona",
-  "instructions": "persona-random-instructions.md",
-  "userInvocable": true
-}
