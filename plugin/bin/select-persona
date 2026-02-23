@@ -1,0 +1,89 @@
+#!/usr/bin/env bash
+#
+# select-persona - CLI tool for IT Crowd persona selection
+#
+# Usage:
+#   select-persona roy          # Switch to Roy
+#   select-persona --list       # List available personas
+#   select-persona --clear      # Clear selection (random next session)
+#   select-persona --random     # Pick random persona now
+
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PLUGIN_ROOT="$(dirname "$SCRIPT_DIR")"
+
+# Source helpers
+source "$PLUGIN_ROOT/lib/memory-helpers.sh"
+source "$PLUGIN_ROOT/lib/persona-manager.sh"
+
+# Display usage
+usage() {
+    cat << EOF
+IT Crowd Claude - Persona Selection
+
+Usage:
+  select-persona <persona>      Select specific persona
+  select-persona --list         List available personas
+  select-persona --clear        Clear selection (random next session)
+  select-persona --random       Pick random persona now
+
+Available personas:
+EOF
+    list_personas
+    exit 0
+}
+
+# Main logic
+main() {
+    if [[ $# -eq 0 ]]; then
+        usage
+    fi
+
+    case "$1" in
+        --list|-l)
+            echo "Available IT Crowd personas:"
+            list_personas
+            ;;
+        --clear|-c)
+            clear_session_persona
+            echo "✓ Persona selection cleared"
+            echo "  Next session will select random persona"
+            ;;
+        --random|-r)
+            local persona
+            persona=$(select_random_persona)
+            store_session_persona "$persona"
+            echo "✓ Selected random persona: $(persona_display_name "$persona")"
+            echo "  Restart Claude Code to activate"
+            ;;
+        --help|-h)
+            usage
+            ;;
+        *)
+            # Treat as persona name
+            local requested="$1"
+            local found=false
+
+            for p in "${PERSONAS[@]}"; do
+                if [[ "$p" == "$requested" ]]; then
+                    found=true
+                    store_session_persona "$p"
+                    echo "✓ Selected persona: $(persona_display_name "$p")"
+                    echo "  Restart Claude Code to activate"
+                    break
+                fi
+            done
+
+            if [[ "$found" == "false" ]]; then
+                echo "Error: Unknown persona '$requested'"
+                echo ""
+                echo "Available personas:"
+                list_personas
+                exit 1
+            fi
+            ;;
+    esac
+}
+
+main "$@"

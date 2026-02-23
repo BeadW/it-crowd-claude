@@ -1,0 +1,28 @@
+{
+  "description": "IT Crowd Claude - Persona injection hooks",
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ${CLAUDE_PLUGIN_ROOT}/hooks/inject-persona.sh",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "SubagentStart": [
+      {
+        "matcher": "roy|moss|jen|douglas|richmond|denholm",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ${CLAUDE_PLUGIN_ROOT}/hooks/inject-subagent-persona.sh",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

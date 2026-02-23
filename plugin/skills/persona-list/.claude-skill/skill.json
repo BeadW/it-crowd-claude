@@ -1,0 +1,6 @@
+{
+  "name": "persona-list",
+  "description": "List all available IT Crowd personas",
+  "instructions": "persona-list-instructions.md",
+  "userInvocable": true
+}

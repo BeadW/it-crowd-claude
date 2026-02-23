@@ -1,0 +1,6 @@
+{
+  "name": "persona",
+  "description": "Show or switch the active IT Crowd persona",
+  "instructions": "persona-instructions.md",
+  "userInvocable": true
+}

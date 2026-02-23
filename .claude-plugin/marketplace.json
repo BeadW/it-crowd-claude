@@ -1,0 +1,23 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "it-crowd-claude-local",
+  "description": "Local development marketplace for IT Crowd Claude plugin",
+  "owner": {
+    "name": "Brad Williams",
+    "email": "brad.williams@nib.com.au"
+  },
+  "plugins": [
+    {
+      "name": "it-crowd-claude",
+      "description": "Give Claude an IT Crowd personality - random persona selection with session persistence. Includes Roy, Moss, Jen, and Douglas.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Brad Williams",
+        "email": "brad.williams@nib.com.au"
+      },
+      "source": "./plugin",
+      "category": "fun",
+      "homepage": "https://github.com/BeadW/it-crowd-claude"
+    }
+  ]
+}
