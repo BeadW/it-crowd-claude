@@ -14,6 +14,13 @@ claude plugin marketplace add https://github.com/BeadW/it-crowd-claude.git
 claude plugin install it-crowd-claude
 ```
 
+**IMPORTANT**: If you have other persona plugins (like `silicon-valley-claude`), disable them first:
+
+```bash
+claude plugin disable silicon-valley-claude
+rm ~/.claude/session_persona  # Clear any existing persona
+```
+
 Restart Claude Code and you'll get a random IT Crowd persona!
 
 ## Usage
