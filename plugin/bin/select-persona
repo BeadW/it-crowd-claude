@@ -55,7 +55,7 @@ main() {
             persona=$(select_random_persona)
             store_session_persona "$persona"
             echo "✓ Selected random persona: $(persona_display_name "$persona")"
-            echo "  Restart Claude Code to activate"
+            echo "  Takes effect on your next message"
             ;;
         --help|-h)
             usage
@@ -65,12 +65,12 @@ main() {
             local requested="$1"
             local found=false
 
-            for p in "${PERSONAS[@]}"; do
+            for p in "${ALL_PERSONAS[@]}"; do
                 if [[ "$p" == "$requested" ]]; then
                     found=true
                     store_session_persona "$p"
                     echo "✓ Selected persona: $(persona_display_name "$p")"
-                    echo "  Restart Claude Code to activate"
+                    echo "  Takes effect on your next message"
                     break
                 fi
             done
