@@ -113,7 +113,7 @@ claude plugin marketplace remove it-crowd-claude
 
 ## Credits
 
-Inspired by [silicon-valley-claude](https://github.com/anthropics/silicon-valley-claude) from Anthropic.
+Inspired by [silicon-valley-claude](https://github.com/BeadW/silicon-valley-claude) by Brad Williams.
 
 Character profiles researched from [The IT Crowd Wiki](https://theitcrowd.fandom.com/wiki/The_IT_Crowd_Wiki).
 
@@ -123,4 +123,4 @@ MIT - Characters from Channel 4's The IT Crowd (parody/educational use)
 
 ## Related Projects
 
-- [silicon-valley-claude](https://github.com/anthropics/silicon-valley-claude) - Silicon Valley personas for Claude Code
+- [silicon-valley-claude](https://github.com/BeadW/silicon-valley-claude) - Silicon Valley personas for Claude Code
